@@ -1,0 +1,748 @@
+:root {
+    /* Default Theme (Yellow) */
+    --accent-primary: #FFE600;
+    --accent-secondary: #FFD700;
+    --bg-dark: #0B0B0B;
+    --surface-dark: #1A1A1A;
+    --surface-light: #2A2A2A;
+    --text-primary: #FFFFFF;
+    --text-secondary: #CCCCCC;
+    --border-color: #333333;
+    --accent-glow: rgba(255, 230, 0, 0.3);
+    --font-main: 'Inter', sans-serif;
+    --btn-text: #000000;
+
+    /* Logo Vars (Default) */
+    --logo-text: #FFFFFF;
+    --logo-bg: #FFE600;
+    --logo-petals: #000000;
+}
+
+
+/* Yellow Light Theme */
+body.yellow-light {
+    --accent-primary: #D4AF37;
+    /* Metallic Gold for contrast on white */
+    --accent-secondary: #B8860B;
+    --bg-dark: #FFFFFF;
+    --surface-dark: #F5F5F5;
+    --surface-light: #E0E0E0;
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --border-color: #CCCCCC;
+    --border-color: #CCCCCC;
+    --accent-glow: rgba(212, 175, 55, 0.3);
+    /* Logo Vars */
+    --logo-text: #000000;
+    --logo-bg: #FFE600;
+    --logo-petals: #000000;
+}
+
+/* Dark Green Dark Theme */
+body.dark-green-dark {
+    --accent-primary: #4deb9f;
+    --accent-secondary: #3dd68e;
+    --bg-dark: #06321d;
+    --surface-dark: #0a4f2e;
+    --surface-light: #0d663b;
+    --text-primary: #FFFFFF;
+    --text-secondary: #CCCCCC;
+    --border-color: #0d663b;
+    --accent-glow: rgba(77, 235, 159, 0.3);
+    /* Logo Vars */
+    --logo-text: #4deb9f;
+    --logo-bg: transparent;
+    /* Assuming icon is just petals? Or mint bg? Let's go with Mint BG */
+    --logo-bg: #4deb9f;
+    --logo-petals: #06321d;
+}
+
+/* Dark Green Light Theme */
+body.dark-green-light {
+    --accent-primary: #06321d;
+    /* Dark Green for primary actions */
+    --accent-secondary: #0a4f2e;
+    --bg-dark: #FFFFFF;
+    --surface-dark: #F0FDF4;
+    /* Very light green tint */
+    --surface-light: #DCFCE7;
+    --text-primary: #06321d;
+    /* Dark Green text */
+    --text-secondary: #14532d;
+    --border-color: #8be8ab;
+    --accent-glow: rgba(6, 50, 29, 0.1);
+    --btn-text: #FFFFFF;
+    /* White text for dark green buttons */
+    /* Logo Vars */
+    --logo-text: #06321d;
+    --logo-bg: #06321d;
+    --logo-petals: #4deb9f;
+}
+
+.theme-selector {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--surface-dark);
+    padding: 10px;
+    border-radius: 30px;
+    display: flex;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    z-index: 1000;
+}
+
+.theme-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.theme-btn:hover {
+    transform: scale(1.2);
+}
+
+.theme-yellow-dark {
+    background-color: #FFE600;
+}
+
+/* Use yellow to represent 'Yellow Dark' button */
+.theme-yellow-light {
+    background-color: #FFFFFF;
+    border: 2px solid #FFE600;
+}
+
+/* White with yellow border */
+.theme-dark-green-dark {
+    background-color: #06321d;
+    border: 1px solid #fff;
+}
+
+/* Dark Green */
+.theme-dark-green-light {
+    background-color: #FFFFFF;
+    border: 2px solid #06321d;
+}
+
+/* White with green border */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 3.5rem;
+    background: linear-gradient(90deg, var(--text-primary), var(--text-secondary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.highlight {
+    color: var(--accent-primary);
+}
+
+/* Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 80px 0;
+}
+
+/* Header */
+header {
+    padding: 20px 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-text {
+    fill: var(--logo-text);
+}
+
+.logo-icon-bg {
+    fill: var(--logo-bg);
+}
+
+.logo-icon-petals {
+    fill: var(--logo-petals);
+}
+
+.logo-text {
+    fill: var(--logo-text);
+}
+
+.logo-icon-bg {
+    fill: var(--logo-bg);
+}
+
+.logo-icon-petals {
+    fill: var(--logo-petals);
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    color: var(--text-primary);
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--surface-light);
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    top: 100%;
+    left: 0;
+}
+
+.dropdown-content a {
+    color: var(--text-secondary);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--surface-dark);
+    color: var(--accent-primary);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    color: var(--accent-primary);
+}
+
+.nav-links a:hover {
+    color: var(--accent-primary);
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--accent-primary);
+    color: var(--btn-text);
+    font-weight: 600;
+    border-radius: 4px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 255, 157, 0.1);
+}
+
+/* Hero Section */
+.hero {
+    min-height: 800px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 100px;
+    /* Space for fixed header */
+}
+
+.hero-content {
+    flex: 1;
+    z-index: 2;
+    padding-right: 50px;
+}
+
+.hero-visual {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.phone-container {
+    position: relative;
+    width: 300px;
+    height: 600px;
+    perspective: 1000px;
+    /* Enable 3D space */
+}
+
+.phone {
+    position: absolute;
+    width: 280px;
+    height: auto;
+    border-radius: 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border: 8px solid #1a1a1a;
+    transition: transform 0.3s ease;
+    animation: float 6s ease-in-out infinite;
+}
+
+.phone.light {
+    top: 50px;
+    left: -40px;
+    z-index: 1;
+    transform: rotateY(-10deg) rotateZ(-5deg);
+    animation-delay: 0s;
+}
+
+.phone.dark {
+    top: 0;
+    left: 80px;
+    z-index: 2;
+    transform: rotateY(10deg) rotateZ(5deg);
+    animation-delay: 1s;
+    /* Offset float */
+}
+
+/* Hover effect: Pivot them slightly */
+.hero:hover .phone.light {
+    transform: rotateY(-5deg) rotateZ(-2deg) translateX(-10px);
+}
+
+.hero:hover .phone.dark {
+    transform: rotateY(5deg) rotateZ(2deg) translateX(10px);
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px) rotateY(var(--qy)) rotateZ(var(--qz));
+    }
+
+    50% {
+        transform: translateY(-20px) rotateY(var(--qy)) rotateZ(var(--qz));
+    }
+
+    100% {
+        transform: translateY(0px) rotateY(var(--qy)) rotateZ(var(--qz));
+    }
+}
+
+/* Note: CSS variables for rotation didn't exist in .phone, hardcoding float for simplicity or using a wrapper would be better. 
+   Let's use a simpler float that adds to the transform. Actually, combining transforms in keyframes with static transforms is tricky.
+   Better approach: Put phones in wrappers for float, OR just float them simply.
+   Let's try a simpler float that respects the initial rotation by defining specific keyframes for each.
+*/
+
+@keyframes float-light {
+
+    0%,
+    100% {
+        transform: translateY(0) rotateY(-10deg) rotateZ(-5deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotateY(-10deg) rotateZ(-5deg);
+    }
+}
+
+@keyframes float-dark {
+
+    0%,
+    100% {
+        transform: translateY(0) rotateY(10deg) rotateZ(5deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotateY(10deg) rotateZ(5deg);
+    }
+}
+
+.phone.light {
+    animation: float-light 6s ease-in-out infinite;
+}
+
+.phone.dark {
+    animation: float-dark 6s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.hero:hover .phone.light {
+    animation-play-state: paused;
+    /* Pause float on hover to show interaction? Or just let it float. */
+    transform: rotateY(-20deg) rotateZ(-5deg) translateX(-20px);
+    /* Override for hover */
+    /* Interaction conflicts with keyframes. Let's simple float the container and pivot the phones. */
+}
+
+/* REVISION: Float the container or individual elements?
+   Let's float the container for shared movement, and pivot individual phones on load/hover.
+*/
+
+.hero h1 {
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 500px;
+    margin-bottom: 30px;
+}
+
+/* Features Section (Categorized) */
+.features {
+    background-color: var(--bg-dark);
+    /* Ensure background is dark */
+    padding: 100px 0;
+}
+
+.features-intro {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Force 2 columns */
+    gap: 30px;
+}
+
+.feature-category {
+    background: var(--surface-light);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.category-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.feature-category h3 {
+    color: var(--accent-primary);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+}
+
+.feature-list {
+    list-style: none;
+}
+
+.feature-list li {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: flex-start;
+}
+
+.feature-list li strong {
+    color: var(--text-primary);
+    margin-right: 8px;
+    display: block;
+}
+
+/* Accordion Section (Why Web3) */
+.why-web3 {
+    padding: 100px 0;
+    background: var(--surface-dark);
+}
+
+.accordion {
+    max-width: 800px;
+    margin: 50px auto 0;
+}
+
+details {
+    margin-bottom: 15px;
+    background: var(--surface-light);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+details[open] {
+    border-color: var(--accent-primary);
+}
+
+summary {
+    padding: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-primary);
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--accent-primary);
+    transition: transform 0.3s ease;
+}
+
+details[open] summary::after {
+    transform: rotate(45deg);
+}
+
+.accordion-content {
+    padding: 0 20px 20px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Get Started */
+.get-started {
+    text-align: center;
+    background: linear-gradient(180deg, var(--bg-dark) 0%, var(--surface-dark) 100%);
+    position: relative;
+}
+
+.steps {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 60px;
+    flex-wrap: wrap;
+}
+
+.step {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    text-align: left;
+}
+
+.step-number {
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+    /* Lighter than surface-light */
+    opacity: 0.8;
+    margin-bottom: -20px;
+    display: block;
+}
+
+.btn-link {
+    color: var(--accent-primary);
+    font-weight: 600;
+    margin-top: auto;
+    display: inline-block;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
+
+.developers-creators {
+    padding: 100px 0;
+}
+
+.footer-links h3 {
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+}
+
+.footer-links a:hover {
+    color: var(--accent-primary);
+}
+
+.step h3 {
+    color: var(--accent-secondary);
+    margin-bottom: 10px;
+}
+
+.download-area {
+    margin-top: 60px;
+    padding: 40px;
+    background: var(--surface-light);
+    border-radius: 16px;
+    display: inline-block;
+    border: 1px solid var(--border-color);
+}
+
+/* Footer */
+footer {
+    padding: 50px 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        height: auto;
+        padding-top: 100px;
+    }
+
+    .hero-visual {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        mask-image: linear-gradient(to bottom, transparent, black 10%);
+        -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%);
+        margin-top: 40px;
+    }
+
+    .hero-content {
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .features {
+        padding: 40px 0;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Theme Selector */
+.theme-selector {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--surface-dark);
+    padding: 10px;
+    border-radius: 30px;
+    display: flex;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    z-index: 1000;
+}
+
+.theme-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.theme-btn:hover {
+    transform: scale(1.2);
+}
